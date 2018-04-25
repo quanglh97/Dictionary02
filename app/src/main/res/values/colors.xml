@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#ffa000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBacground">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+
+    <!-- KhaiTB -->
+    <color name="login_facebookBlue">#3F5996</color>
+    <color name="login_twitterBlue">#29C5F6</color>
+    <color name="login_googleRed">#D03E2F</color>
+    <color name="login_white">#FFFFFF</color>
+    <color name="login_transparent">#00000000</color>
+    <color name="login_editTextBG">#DADADA</color>
+    <color name="textColor">#6e6e6e</color>
+
+    <color name="colorMon">#8cf9a9</color>
+</resources>
