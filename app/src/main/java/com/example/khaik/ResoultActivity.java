@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.khaik.Adapter.SearchAdapter;
 import com.example.khaik.Model.Friend;
+import com.example.khaik.Model.Word;
 import com.example.khaik.hihi21042018.R;
 
 
@@ -25,12 +26,12 @@ public class ResoultActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        ArrayList<Friend> list = (ArrayList<Friend>) intent.getSerializableExtra("list");
+        ArrayList<Word> list = (ArrayList<Word>) intent.getSerializableExtra("list");
         if (list == null)
         {
             list = new ArrayList<>();
-            Friend friend = (Friend) intent.getSerializableExtra("chose");
-            list.add(friend);
+            Word word = (Word) intent.getSerializableExtra("chose");
+            list.add(word);
         }
         String query = intent.getStringExtra("key");
 

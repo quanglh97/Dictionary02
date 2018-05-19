@@ -15,12 +15,12 @@
         android:layout_height="wrap_content">
         <TextView
             android:text="KhaiTB"
-            android:id="@+id/tv_MSSV"
+            android:id="@+id/tv_WORD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:text="Tran Ba Khai"
-            android:id="@+id/tv_TENSV"
+            android:id="@+id/tv_MEAN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

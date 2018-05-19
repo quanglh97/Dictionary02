@@ -13,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.khaik.Model.Friend;
+import com.example.khaik.Model.Word;
 import com.example.khaik.ResoultActivity;
 import com.example.khaik.hihi21042018.R;
 
@@ -22,15 +23,22 @@ import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> implements Filterable{
     private Context context;
-    private    ArrayList<Friend> friend;
-    private  ArrayList<Friend> tempFriend;
-    public static ArrayList<Friend> afterFilter;
+    private    ArrayList<Word> word;
+    private  ArrayList<Word> tempWord;
+    //private    ArrayList<Friend> friend;
+    //private  ArrayList<Friend> tempFriend;
+    public static ArrayList<Word> afterFilter;
     private CustomFilter csFilter;
 
-    public SearchAdapter(Context context, ArrayList<Friend> friend) {
+//    public SearchAdapter(Context context, ArrayList<Friend> friend) {
+//        this.context = context;
+//        this.friend = friend;
+//        this.tempFriend = friend;
+//    }
+    public SearchAdapter(Context context, ArrayList<Word> word) {
         this.context = context;
-        this.friend = friend;
-        this.tempFriend = friend;
+        this.word = word;
+        this.tempWord = word;
     }
 
     @NonNull
@@ -39,18 +47,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> implem
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.layout_item, parent, false);
 
-        return new SearchViewHolder(itemView, context, tempFriend);
+        return new SearchViewHolder(itemView, context, tempWord);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.TENSV.setText(friend.get(position).getTENSV());
-        holder.MASSV.setText(friend.get(position).getMSSV());
+        holder.WORD.setText(word.get(position).getmWord());
+        holder.MEAN.setText(word.get(position).getmMean());
     }
 
     @Override
     public int getItemCount() {
-        return friend.size();
+        return word.size();
     }
 
     @Override
@@ -63,35 +71,34 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> implem
         return csFilter;
     }
 
-    class CustomFilter extends Filter
-    {
+    class CustomFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0)
             {
                 constraint = constraint.toString().toUpperCase();
-                ArrayList<Friend> filters = new ArrayList<>();
-                for (int i = 0; i < tempFriend.size(); i++) {
-                    if (tempFriend.get(i).getMSSV().toUpperCase().contains(constraint)) {
-                        Friend friend = new Friend(tempFriend.get(i).getMSSV(),tempFriend.get(i).getTENSV());
-                        filters.add(friend);
+                ArrayList<Word> filters = new ArrayList<>();
+                for (int i = 0; i < tempWord.size(); i++) {
+                    if (tempWord.get(i).getmWord().toUpperCase().contains(constraint)) {
+                        Word word = new Word(tempWord.get(i).getmWord(),tempWord.get(i).getmMean());
+                        filters.add(word);
                     }
                 }
 
                 results.count = filters.size();
                 results.values = filters;
             }else {
-                results.count = tempFriend.size();
-                results.values = tempFriend;
+                results.count = tempWord.size();
+                results.values = tempWord;
             }
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            friend = (ArrayList<Friend>)results.values;
-            afterFilter = friend;
+            word = (ArrayList<Word>)results.values;
+            afterFilter = word;
             notifyDataSetChanged();
         }
     }
@@ -99,15 +106,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> implem
 
 class SearchViewHolder extends ViewHolder implements View.OnClickListener, View.OnLongClickListener{
     private Context context;
-    public TextView TENSV;
-    public TextView MASSV;
-    private ArrayList<Friend> listFriend;
+    public TextView WORD;
+    public TextView MEAN;
+    private ArrayList<Word> listWord ;
 
-    public SearchViewHolder(View itemView, Context context, ArrayList<Friend> listFriend) {
+    public SearchViewHolder(View itemView, Context context, ArrayList<Word> listWord) {
         super(itemView);
-        TENSV = (TextView) itemView.findViewById(R.id.tv_TENSV);
-        MASSV = (TextView) itemView.findViewById(R.id.tv_MSSV);
-        this.listFriend = listFriend;
+        WORD  = (TextView) itemView.findViewById(R.id.tv_WORD);
+        MEAN = (TextView) itemView.findViewById(R.id.tv_MEAN);
+        this.listWord = listWord;
 
         this.context = context;
         itemView.setOnClickListener(this);
@@ -117,9 +124,9 @@ class SearchViewHolder extends ViewHolder implements View.OnClickListener, View.
     @Override
     public void onClick(View v) {
         int position = getAdapterPosition();
-        Friend friend = SearchAdapter.afterFilter.get(position);
+        Word word = SearchAdapter.afterFilter.get(position);
         Intent intent = new Intent(context, ResoultActivity.class);
-        intent.putExtra("chose", friend);
+        intent.putExtra("chose", word);
         this.context.startActivity(intent);
 
     }

@@ -14,16 +14,22 @@ import android.widget.SearchView;
 
 import com.example.khaik.Adapter.SearchAdapter;
 import com.example.khaik.Database.Database;
+import com.example.khaik.Database.DatabaseAccess;
 import com.example.khaik.Model.Friend;
+import com.example.khaik.Model.Word;
 import com.example.khaik.hihi21042018.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainSearchActivity extends AppCompatActivity {
     SearchAdapter adapter;
     Toolbar toolbar;
     ArrayList<Friend> myListFriend;
     Database myDatabase;
+    ArrayList<Word> myListWord;
+    DatabaseAccess databaseAccess;
+
     public static final String My_CONTENT = "MY_CONTEN";
     public static final String My_NAME = "MY_NAME";
     public static final String My_MSSV = "MY_MSSV";
@@ -38,11 +44,19 @@ public class MainSearchActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         lv.setLayoutManager(layoutManager);
 
-        myListFriend = new ArrayList<>();
-        myDatabase = new Database(this);
-        myListFriend = (ArrayList<Friend>) myDatabase.getFriend();
 
-        adapter = new SearchAdapter(getApplicationContext(), myListFriend);
+
+        databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        myListWord = databaseAccess.getAllWord();
+        databaseAccess.close();
+        adapter = new SearchAdapter(getApplicationContext(), myListWord);
+
+//        myListFriend = new ArrayList<>();
+//        myDatabase = new Database(this);
+//        myListFriend = (ArrayList<Friend>) myDatabase.getFriend();
+        //adapter = new SearchAdapter(getApplicationContext(), myListFriend);
+
         lv.setAdapter(adapter);
     }
 
